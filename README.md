@@ -2,6 +2,17 @@
 
 1. Run `bal persist generate`.
 
+2. Edit the generated `Config.toml` file to add the database configurations.
+
+```
+    [customerOrders]
+    host = "localhost"
+    port = 3305
+    user = "root"
+    password = "sqletl123"
+    database = "customer_order"
+```
+The `password` should be replaced with the actual password that will be used for `MYSQL_ROOT_PASSWORD` when setting up the database.
 
 ## Setting up the MySQL database on docker
 
@@ -10,6 +21,7 @@
 ```sh
     docker run --rm -d --name mysql-etl -p 3305:3306 -e MYSQL_ROOT_PASSWORD=sqletl123 mysql:latest
 ```
+Provide a prefered password for `MYSQL_ROOT_PASSWORD`.
 
 2. Execute `docker ps` to check if the container is running.
 
@@ -26,7 +38,7 @@
 ```sh
     docker exec -it mysql-etl mysql -uroot -p
 ```
-and enter the password `sqletl123` when prompted.
+and enter the password given for `MYSQL_ROOT_PASSWORD` when prompted.
 
 5. Create a new database `customer_order` and use it.
 
