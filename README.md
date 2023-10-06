@@ -1,9 +1,14 @@
+## Generate the persist client object, types, and scripts
+
+1. Run `bal persist generate`.
+
+
 ## Setting up the MySQL database on docker
 
 1. Pull the official docker image for MySQL and run it on a docker container
 
 ```sh
-    docker run -d --name mysql-etl -e MYSQL_ROOT_PASSWORD=sqletl123 mysql:latest
+    docker run --rm -d --name mysql-etl -p 3305:3306 -e MYSQL_ROOT_PASSWORD=sqletl123 mysql:latest
 ```
 
 2. Execute `docker ps` to check if the container is running.
@@ -23,10 +28,11 @@
 ```
 and enter the password `sqletl123` when prompted.
 
-5. Create a new database `customer_order`.
+5. Create a new database `customer_order` and use it.
 
     ```sql
         CREATE DATABASE customer_order;
+        USE customer_order;
     ```
 
 6. Execute the `script.sql` file to create the tables and then the `insertData.sql` file to populate the created tables.
@@ -36,7 +42,4 @@ and enter the password `sqletl123` when prompted.
     source insertData.sql
 ```
 
-
-
-
-
+7. Execute `bal run` to run the sample.
